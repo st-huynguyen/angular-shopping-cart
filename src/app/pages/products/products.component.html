@@ -1,1 +1,13 @@
-<p>products works!</p>
+<div class="products">
+  <ul class="products-list">
+    <li *ngFor="let product of productsList" class="product-item">
+      <a [routerLink]="[product.id]" class="product">
+        <img [src]="product.thumbnail" [alt]="product.name">
+        <div class="content">
+          <h3 class="name">{{ product.name }}</h3>
+          <span class="price">Price: ${{ product.price }}</span>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>

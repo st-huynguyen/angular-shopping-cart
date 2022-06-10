@@ -1,9 +1,22 @@
 .header {
-  padding: 2rem;
-  text-transform: uppercase;
-  border-bottom: 1px solid var(--color-gray1);
-}
+  background-color: var(--color-primary);
+  
+  .container {
+    padding: 1.2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 860px;
+    margin: 0 auto;
 
-.heading {
-  text-align: center;
+    .brand {
+      font-size: 1.2rem;
+      color: var(--color-white);
+      text-transform: uppercase;
+      
+      .link:visited {
+        color: var(--color-white);
+      }
+    }
+  }
 }
