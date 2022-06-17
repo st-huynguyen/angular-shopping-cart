@@ -1,8 +1,10 @@
 <header class="header">
   <div class="container">
     <h1 class="brand">
-      <a class="link" href="/">Sticker plaza</a>
+      <a class="link" [routerLink]="'/'">Sticker plaza</a>
     </h1>
-    <div class="cart"></div>
+    <div class="cart">
+      <a class="link" [routerLink]="'/cart'">Your cart ({{ cartItems.length }})</a>
+    </div>
   </div>
 </header>

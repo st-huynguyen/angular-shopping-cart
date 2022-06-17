@@ -14,9 +14,15 @@
       color: var(--color-white);
       text-transform: uppercase;
       
-      .link:visited {
-        color: var(--color-white);
-      }
+    }
+    
+    .cart {
+      color: var(--color-white);
+      text-decoration: underline;
+    }
+
+    .link:visited {
+      color: var(--color-white);
     }
   }
 }
