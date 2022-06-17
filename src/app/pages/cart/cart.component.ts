@@ -20,6 +20,5 @@ export class CartComponent implements OnInit {
         this.cartItems = cartItems;
       }
     );
-    console.log(this.cartItems)
   }
 }

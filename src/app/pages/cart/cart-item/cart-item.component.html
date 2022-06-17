@@ -1,0 +1,13 @@
+<div class="item">
+  <span class="name">{{ cartItem.name }}</span>
+  <div class="actions">
+    <button class="btn" (click)="onRemoveItem">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <span class="quantity">{{ cartItem.quantity }}</span>
+    <button class="btn" (click)="onAddItem">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <span class="price">{{ cartItem.price }}</span>
+</div>

@@ -1,1 +1,13 @@
-<p>cart works!</p>
+<div class="cart-page">
+  <h2 class="heading">Your cart</h2>
+  <div class="cart-container">
+    <ul *ngIf="cartItems.length > 0; else emptyCart" class="cart-list">
+      <li *ngFor="let item of cartItems" class="cart-item">
+        <app-cart-item [cartItem]="item"></app-cart-item>
+      </li>
+    </ul>
+    <ng-template #emptyCart>
+      <p>No items in your cart</p>
+    </ng-template>
+  </div>
+</div>
