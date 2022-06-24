@@ -11,12 +11,14 @@ import { AppState } from '../../store/app-state';
 })
 export class HeaderComponent implements OnInit {
   cartItems!: CartItem[];
+  totalItems!: number;
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.store.pipe(select('cart')).subscribe(
       cart => {
         this.cartItems = cart.cartList
+        this.totalItems = cart.totalItems
       }
     );
   }
