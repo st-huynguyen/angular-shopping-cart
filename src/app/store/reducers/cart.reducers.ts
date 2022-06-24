@@ -2,14 +2,18 @@ import { createReducer, on } from '@ngrx/store';
 import { addItemToCart, deleteItemToCart } from '../actions/cart.actions';
 import { Cart as CartItem } from '../../core/model/cart.model';
 
-const initialState: CartItem[] = [];
+const initialState = {
+  cartList: [] as CartItem[],
+  totalPrice: 0
+};
 
 export const cartReducer = createReducer(
   initialState,
   on(addItemToCart, (state, { cartItem }) => {
-    const itemIndex = state.findIndex((item) => item.productId === cartItem.productId);
+    const totalPrice = state.totalPrice + cartItem.price;
+    const itemIndex = state.cartList.findIndex((item) => item.productId === cartItem.productId);
     if (itemIndex !== -1) {
-      const newCart = state.map(currentItem => {
+      const newCart = state.cartList.map(currentItem => {
         if (currentItem.productId === cartItem.productId) {
           const newItem = { ...currentItem };
           newItem.quantity++;
@@ -17,14 +21,15 @@ export const cartReducer = createReducer(
         }
         return currentItem;
       });
-      return [...newCart];
+      return { totalPrice, cartList: [...newCart]};
     }
-    return [...state, cartItem];
+    return { totalPrice, cartList: [...state.cartList, cartItem]};
   }),
   on(deleteItemToCart, (state, { cartItem }) => {
-    const itemIndex = state.findIndex((item) => item.productId === cartItem.productId);
+    const totalPrice = state.totalPrice - cartItem.price;
+    const itemIndex = state.cartList.findIndex((item) => item.productId === cartItem.productId);
     if (itemIndex !== -1 && cartItem.quantity > 1) {
-      const newCart = state.map(currentItem => {
+      const newCart = state.cartList.map(currentItem => {
         if (currentItem.productId === cartItem.productId) {
           const newItem = { ...currentItem };
           newItem.quantity--;
@@ -32,9 +37,9 @@ export const cartReducer = createReducer(
         }
         return currentItem;
       });
-      return [...newCart];
+      return { totalPrice, cartList: [...newCart]};
     } else {
-      return state.filter(item => item.id !== cartItem.id);
+      return { totalPrice, cartList: state.cartList.filter(item => item.id !== cartItem.id)};
     }
   }),
 );

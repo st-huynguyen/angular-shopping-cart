@@ -13,6 +13,10 @@
           <app-cart-item [cartItem]="item"></app-cart-item>
         </li>
       </ul>
+      <div class="cart-total">
+        <span>Total</span>
+        <span>{{ totalPrice }}</span>
+      </div>
     </div>
     <ng-template #emptyCart>
       <p>No items in your cart</p>
