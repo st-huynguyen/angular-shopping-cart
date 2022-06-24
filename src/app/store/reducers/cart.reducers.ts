@@ -1,15 +1,40 @@
 import { createReducer, on } from '@ngrx/store';
-import { addItemToCart } from '../actions/cart.actions';
+import { addItemToCart, deleteItemToCart } from '../actions/cart.actions';
 import { Cart as CartItem } from '../../core/model/cart.model';
 
-// const initialState: CartItem[] = [];
-const initialState: CartItem[] = [{"id":"cart2","productId":"product1","quantity":1,"name":"ReactJS Sticker","price":2,"thumbnail":"https://res.cloudinary.com/cloudinaryassets/image/upload/v1654872873/angular-shopping-cart/reactjs_gncbuq.jpg"},{"id":"cart2","productId":"product3","quantity":1,"name":"AngularJS Sticker","price":3,"thumbnail":"https://res.cloudinary.com/cloudinaryassets/image/upload/v1654872872/angular-shopping-cart/angularjs_gqudvk.jpg"}];
+const initialState: CartItem[] = [];
 
 export const cartReducer = createReducer(
   initialState,
-  on(addItemToCart, (state, { cartItem }) => [...state, cartItem])
+  on(addItemToCart, (state, { cartItem }) => {
+    const itemIndex = state.findIndex((item) => item.productId === cartItem.productId);
+    if (itemIndex !== -1) {
+      const newCart = state.map(currentItem => {
+        if (currentItem.productId === cartItem.productId) {
+          const newItem = { ...currentItem };
+          newItem.quantity++;
+          return newItem;
+        }
+        return currentItem;
+      });
+      return [...newCart];
+    }
+    return [...state, cartItem];
+  }),
+  on(deleteItemToCart, (state, { cartItem }) => {
+    const itemIndex = state.findIndex((item) => item.productId === cartItem.productId);
+    if (itemIndex !== -1 && cartItem.quantity > 1) {
+      const newCart = state.map(currentItem => {
+        if (currentItem.productId === cartItem.productId) {
+          const newItem = { ...currentItem };
+          newItem.quantity--;
+          return newItem;
+        }
+        return currentItem;
+      });
+      return [...newCart];
+    } else {
+      return state.filter(item => item.id !== cartItem.id);
+    }
+  }),
 );
-
-const handleAddItemToCart = () => {
-
-};

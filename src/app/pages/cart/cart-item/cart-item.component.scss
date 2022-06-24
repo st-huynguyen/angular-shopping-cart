@@ -1,6 +1,6 @@
 .item {
   display: grid;
-  grid-template-columns: 4fr 2fr 1fr;
+  grid-template-columns: 4fr 2fr 1fr 1fr;
   align-items: center;
 
   .name {
@@ -10,6 +10,7 @@
   .actions {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
 
     .btn {

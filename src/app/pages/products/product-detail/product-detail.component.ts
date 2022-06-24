@@ -36,7 +36,7 @@ export class ProductDetailComponent implements OnInit {
   addToCart() {
     const { id: productId, description, ...others  } = this.productDetail;
     const cartItem: CartItem = {
-      id: 'cart2',
+      id: Math.floor(Math.random() * 1001) + productId,
       productId,
       quantity: 1,
       ...others
